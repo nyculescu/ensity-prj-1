@@ -13,7 +13,7 @@ set(CMAKE_C_COMPILER "/usr/bin/gcc")
 set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 
 # Make sure to use Cygwin-style paths instead of Windows path
-set(CMAKE_BINARY_DIR "C:/ProgramData/Jenkins/.jenkins/workspace/build/build")
+set(CMAKE_BINARY_DIR "/cygdrive/c/ProgramData/Jenkins/.jenkins/workspace/build/build")
 
 # Add an executable
 add_executable(main_program Main_program.c)
