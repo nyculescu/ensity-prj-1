@@ -9,19 +9,24 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
 # Add an executable
-add_executable(MyExecutable Main_program.c)
+add_executable(main_program Main_program.c)
 
 # Optionally, set compiler flags
 # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
 
-add_library(objlib OBJECT Main_program.c)
+# Ensure OBJCOPY is available
+find_program(OBJCOPY NAMES objcopy)
 
-add_executable(main_program Main_program.c)
+if (OBJCOPY)
+    # Create S19 file after build
+    add_custom_command(TARGET main_program POST_BUILD
+                       COMMAND ${OBJCOPY} --output-target=srec $<TARGET_FILE:main_program> ${CMAKE_CURRENT_BINARY_DIR}/main_program.s19)
+else()
+    message(WARNING "objcopy not found. S19 file will not be created.")
+endif()
 
-add_custom_command(TARGET main_program POST_BUILD
-                   COMMAND ${CMAKE_OBJCOPY} --output-target=srec $<TARGET_FILE:main_program> ${CMAKE_CURRENT_BINARY_DIR}/main_program.s19)
-
+# Create a zip file with the executable and the S19 file
 add_custom_target(zip ALL
                   COMMAND ${CMAKE_COMMAND} -E tar "cfv" "artifacts.zip" --format=zip
                   ${CMAKE_CURRENT_BINARY_DIR}/main_program
-                  ${CMAKE_CURRENT_BINARY_DIR}/main_program.s19)
+                  $<$<BOOL:${OBJCOPY}>:${CMAKE_CURRENT_BINARY_DIR}/main_program.s19>)
