@@ -13,7 +13,7 @@ set(CMAKE_C_COMPILER "/cygdrive/c/cygwin64/bin/gcc.exe")
 set(CMAKE_CXX_COMPILER "/cygdrive/c/cygwin64/bin/g++.exe")
 
 # Make sure to use Cygwin-style paths instead of Windows path
-set(CMAKE_BINARY_DIR "/cygdrive/c/ProgramData/Jenkins/.jenkins/workspace/build/build")
+set(CMAKE_BINARY_DIR "C:/ProgramData/Jenkins/.jenkins/workspace/build/build")
 
 # Add an executable
 add_executable(main_program Main_program.c)
