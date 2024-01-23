@@ -13,7 +13,7 @@ set(CMAKE_C_COMPILER "/cygdrive/c/cygwin64/bin/gcc.exe")
 set(CMAKE_CXX_COMPILER "/cygdrive/c/cygwin64/bin/g++.exe")
 
 # Make sure to use Cygwin-style paths instead of Windows path
-set(CMAKE_BINARY_DIR "/cygdrive/c/ProgramData/Jenkins/.jenkins/workspace/build")
+set(CMAKE_BINARY_DIR "/cygdrive/c/ProgramData/Jenkins/.jenkins/workspace/build/build")
 
 # Add an executable
 add_executable(main_program Main_program.c)
@@ -35,5 +35,5 @@ endif()
 # Create a zip file with the executable and the S19 file
 add_custom_target(zip ALL
                   COMMAND ${CMAKE_COMMAND} -E tar "cfv" "artifacts.zip" --format=zip
-                  ${CMAKE_BINARY_DIR}/build/main_program
-                  $<$<BOOL:${OBJCOPY}>:${CMAKE_BINARY_DIR}/build/main_program.s19>)
+                  ${CMAKE_BINARY_DIR}/main_program
+                  $<$<BOOL:${OBJCOPY}>:${CMAKE_BINARY_DIR}/main_program.s19>)
