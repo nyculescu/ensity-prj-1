@@ -8,6 +8,12 @@ project(Ensity-prj-1 VERSION 1.0)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
+# Set the CMake compiler to point to the Cygwin gcc/g++ binaries
+set(CMAKE_C_COMPILER "/cygdrive/c/cygwin64/bin/gcc.exe")
+set(CMAKE_CXX_COMPILER "/cygdrive/c/cygwin64/bin/g++.exe")
+
+# Make sure to use Cygwin-style paths instead of Windows path
+set(CMAKE_BINARY_DIR "/cygdrive/c/ProgramData/Jenkins/.jenkins/workspace/build")
 
 # Add an executable
 add_executable(main_program Main_program.c)
