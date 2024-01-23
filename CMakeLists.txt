@@ -8,6 +8,7 @@ project(Ensity-prj-1 VERSION 1.0)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
+
 # Add an executable
 add_executable(main_program Main_program.c)
 
