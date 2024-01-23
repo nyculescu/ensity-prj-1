@@ -27,7 +27,7 @@ find_program(OBJCOPY NAMES objcopy)
 if (OBJCOPY)
     # Create S19 file after build
     add_custom_command(TARGET main_program POST_BUILD
-                       COMMAND ${OBJCOPY} --output-target=srec $<TARGET_FILE:main_program> ${CMAKE_CURRENT_BINARY_DIR}/main_program.s19)
+                       COMMAND ${OBJCOPY} --output-target=srec $<TARGET_FILE:main_program> ${CMAKE_BINARY_DIR}/main_program.s19)
 else()
     message(WARNING "objcopy not found. S19 file will not be created.")
 endif()
@@ -35,5 +35,5 @@ endif()
 # Create a zip file with the executable and the S19 file
 add_custom_target(zip ALL
                   COMMAND ${CMAKE_COMMAND} -E tar "cfv" "artifacts.zip" --format=zip
-                  ${CMAKE_CURRENT_BINARY_DIR}/main_program
-                  $<$<BOOL:${OBJCOPY}>:${CMAKE_CURRENT_BINARY_DIR}/main_program.s19>)
+                  ${CMAKE_BINARY_DIR}/build/main_program
+                  $<$<BOOL:${OBJCOPY}>:${CMAKE_BINARY_DIR}/build/main_program.s19>)
